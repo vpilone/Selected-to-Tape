@@ -7,13 +7,14 @@ offset = 0
 
 def execute():
         centerX = vs.RealDialog("Please enter the x value of the center of your pipe.", 0)
-        vs.TextSize(1)
+        vs.TextSize(24)
         vs.ForEachObjectInLayer( getLightLocations, 2, 0, 0)
         #offset = vs.Get2DPt(handles[len(handles) - 1], 0)[0] - vs.Get2DPt(handles[0], 0)[0]
         # if (offset < 0):
         #         offset *= -1
         #center
         vs.DSelectAll()
+        vs.CreateLayer("Tape", 2)
         for h in handles:
                 if centerX < 0:
                         x = vs.Get2DPt(h, 0)[0] + centerX 
@@ -37,8 +38,8 @@ def execute():
                 text = "Color: " + vs.LDevice_GetParamStr(h,0, -2, "Color")
                 vs.CreateText(text)
                 vs.SetTextJust(vs.LNewObj(),2)
-        vs.TextSize(2)
-        vs.MoveTo(centerX, 0.333+.427)
+        vs.TextSize(30)
+        vs.MoveTo(0, 0.333+.427)
         vs.CreateText("C")
         counter = 0
         currentX = -360
@@ -47,6 +48,7 @@ def execute():
                 vs.LineTo(currentX, .192+.427)
                 currentX += 18
                 counter+=1
+        vs.SetDrawingRect(720, 2)
 
 def getLightLocations(h):
         handles.append(h)
